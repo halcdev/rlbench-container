@@ -37,11 +37,11 @@ RUN cd /opt && \
     cd /opt/PyRep && \
     pip3 install .
 
-# 6) RLBench (from source)
+# 6) RLBench (install as regular package, NOT editable)
 RUN cd /opt && \
     git clone https://github.com/stepjam/RLBench.git && \
     cd /opt/RLBench && \
-    pip3 install -e . --no-deps
+    pip3 install .
 
 # 7) Runtime env vars for CoppeliaSim
 ENV LD_LIBRARY_PATH=${COPPELIASIM_ROOT}:${LD_LIBRARY_PATH}
