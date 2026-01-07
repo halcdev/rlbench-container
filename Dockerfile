@@ -8,12 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 python3-pip python3-dev \
     build-essential cmake \
     git wget ca-certificates \
-    libglib2.0-0 libsm6 libxext6 libxrender1 \
-    libxkbcommon-x11-0 libxcb-xinerama0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 \
-    libxcb-randr0 libxcb-render-util0 libxcb-xfixes0 libxcb-shape0 libxcb-sync1 \
-    libx11-xcb1 libxcb1 \
+    libglib2.0-0 \
     libgl1-mesa-glx libegl1-mesa libgl1-mesa-dri mesa-utils \
-    xvfb \
  && rm -rf /var/lib/apt/lists/*
 
 # 2) Python tooling
@@ -45,6 +41,9 @@ RUN cd /opt && \
 
 # 7) Runtime env vars for CoppeliaSim
 ENV LD_LIBRARY_PATH=${COPPELIASIM_ROOT}:${LD_LIBRARY_PATH}
-ENV QT_QPA_PLATFORM_PLUGIN_PATH=${COPPELIASIM_ROOT}
+# ---- Force safe headless Qt ----
+ENV QT_QPA_PLATFORM=offscreen
+ENV QT_PLUGIN_PATH=
+ENV QT_QPA_PLATFORM_PLUGIN_PATH=
 
 WORKDIR /workspace
