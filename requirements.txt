@@ -1,0 +1,7 @@
+numpy
+gymnasium==0.29.1
+pyquaternion
+transforms3d
+opencv-python
+scipy
+shapely
